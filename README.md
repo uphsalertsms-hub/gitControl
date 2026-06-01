@@ -6,6 +6,12 @@ in your Local Machine VsCode Changes
 in Github Interface Changes
 # >>>>>>> 0bb946ce6cf9577b3f67486b0f044aed000294a1 
 
+to Resolve It
+# pick What Version You want between 
+
+a : in your Local Machine VsCode Changes
+B : in Github Interface Changes
+
 ==============================
 
 # To check who owns the GitHub repository

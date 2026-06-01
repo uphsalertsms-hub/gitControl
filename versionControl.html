@@ -47,6 +47,18 @@ or
 <p>Make sure to commit your changes before pulling to avoid conflicts.</p>
 <p>It is mainly used when working with collaborators or multiple devices.</p>
 <p>If you work alone, you may not need to use <code>git pull</code> often.</p>
-    
+
+<h1>Git Log</h1>
+<p><code>git log</code> displays the commit history of your repository.</p>
+
+<h1>Git Reset</h1>
+<p><code>git reset</code> is used to undo commits or changes in your repository.</p>
+<p><code>git reset --soft HEAD~1</code> undoes the last commit but keeps changes staged.</p>
+<p><code>git reset --hard HEAD~1</code> undoes the last commit and deletes all changes.</p>
+<p><code>git reset --hard origin/main</code> resets your local branch to match GitHub and removes all local changes.</p>
+<p><code>git reset --hard &lt;commit-hash&gt;</code> moves your project back to a specific commit and removes later changes.</p>
+<p><code>git reset --soft &lt;commit-hash&gt;</code> moves your project back to a specific commit but keeps changes staged.</p>
+<p>The commit hash can be found in the output of <code>git log</code>.</p>
+
 </body>
 </html>
