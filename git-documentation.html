@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Step By Step About Git Version Control</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main>
+    <h1>Git Version Control - Step by Step Guide</h1>
+    <!-- Git is a version control system that tracks changes to your code. GitHub is a cloud platform where you store your repositories (projects) online. -->
+
+    <section>
+        <h2>Step 1: Create a GitHub Repository</h2>
+        <!-- A repository is a folder that stores all your project files and tracks their history. Public = anyone can see it, Private = only you can see it -->
+        <p>Log in to GitHub, click <strong>New Repository</strong>, enter a repository name, choose Public or Private, and click <strong>Create Repository</strong>.</p>
+    </section>
+
+    <section>
+        <h2>Step 2: Create a Local Folder</h2>
+        <!-- "Local" means on your computer. This is where you'll work on your files before uploading them to GitHub -->
+        <p>Create a folder where you want to store your projects.</p>
+        <pre><code><!-- mkdir = make directory, cd = change directory, ls = list files -->
+mkdir github-projects
+cd github-projects
+ls</code></pre>
+    </section>
+
+    <section>
+        <h2>Step 3: Clone the Repository</h2>
+        <!-- Clone = download a copy of your GitHub repository to your computer. This creates a connection between your local folder and GitHub -->
+        <p>Copy the repository URL from GitHub and run:</p>
+        <pre><code><!-- git clone downloads your repository to your computer. touch creates a new file -->
+git clone https://github.com/your-username/your-repo-name.git
+touch filename.html</code></pre>
+    </section>
+
+    <section>
+        <h2>Step 4: Open the Repository</h2>
+        <!-- Navigate into the folder that was created when you cloned the repository -->
+        <p>Navigate into the cloned repository folder.</p>
+        <pre><code><!-- This enters the folder so you can work with files inside it -->
+cd your-repo-name</code></pre>
+    </section>
+
+    <section>
+        <h2>Step 5: Add Project Files</h2>
+        <!-- Put your project files (HTML, CSS, JavaScript, etc.) into this folder -->
+        <p>Create or copy your files into the repository folder.</p>
+    </section>
+
+    <section>
+        <h2>Step 6: Save Changes with Git</h2>
+        <!-- Staging = selecting which files to save. Committing = saving those files with a message explaining what changed -->
+        <p>Stage and commit your changes:</p>
+        <pre><code><!-- git add . = stage all files in the current folder -->
+git add .</code></pre>
+        <p>or stage a specific file:</p>
+        <pre><code><!-- git add filename = stage only one specific file -->
+git add filename.html</code></pre>
+        <p>Then commit with a message:</p>
+        <pre><code><!-- -m "message" = adds a description of what you changed. This message appears in your project history -->
+git commit -m "Initial commit"</code></pre>
+    </section>
+
+    <section>
+        <h2>Step 7: Upload to GitHub</h2>
+        <!-- git push = upload your local files to GitHub. origin = the online repository, main = the main branch (version of your project) -->
+        <pre><code>git push origin main</code></pre>
+        <p>Refresh your GitHub repository page to verify that your files have been uploaded successfully.</p>
+    </section>
+
+    <section>
+        <h2>Git Pull</h2>
+        <!-- git pull = download the latest changes from GitHub to your computer. Conflicts = when two people change the same file differently -->
+        <p><code>git pull</code> updates your local repository with the latest changes from GitHub.</p>
+        <ul>
+            <li>Make sure to commit your changes before pulling to avoid conflicts.</li>
+            <li>Mainly used when working with collaborators or multiple devices.</li>
+            <li>If you work alone, you may not need to use <code>git pull</code> often.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Git Log</h2>
+        <!-- git log = shows a list of all commits (saves) you've made, including the message, date, and who made the change -->
+        <p><code>git log</code> displays the commit history of your repository.</p>
+    </section>
+
+    <section>
+        <h2>Git Reset</h2>
+        <!-- git reset = undo commits or changes. Different flags (--soft, --hard) determine what happens to your changes -->
+        <p><code>git reset</code> is used to undo commits or changes in your repository.</p>
+        
+        <h3>Reset Commands</h3>
+        <dl>
+            <dt><code>git reset --soft HEAD~1</code></dt>
+            <!-- --soft = undo the commit but keep the changes saved and ready to commit again. HEAD~1 = the last commit -->
+            <dd>Undoes the last commit but keeps changes staged.</dd>
+
+            <dt><code>git reset --hard HEAD~1</code></dt>
+            <!-- --hard = undo the commit AND delete all the changes. You lose your work! -->
+            <dd>Undoes the last commit and deletes all changes.</dd>
+
+            <dt><code>git reset --hard origin/main</code></dt>
+            <!-- origin/main = the version on GitHub. This makes your local copy match exactly what's on GitHub -->
+            <dd>Resets your local branch to match GitHub and removes all local changes.</dd>
+
+            <dt><code>git reset --hard &lt;commit-hash&gt;</code></dt>
+            <!-- commit-hash = a unique ID for a specific commit. You can find this in git log. This goes back to an old version of your project -->
+            <dd>Moves your project back to a specific commit and removes later changes.</dd>
+
+            <dt><code>git reset --soft &lt;commit-hash&gt;</code></dt>
+            <!-- Same as above but --soft keeps your changes so you can re-commit them if needed -->
+            <dd>Moves your project back to a specific commit but keeps changes staged. The commit hash can be found in the output of <code>git log</code>.</dd>
+
+            <dt><code>git reset --hard ORIG_HEAD</code></dt>
+            <!-- ORIG_HEAD = the previous state before you did a reset. This is your "undo button" for resets -->
+            <dd>Undoes the last reset command and restores the previous state of the repository. Helpful if you accidentally reset to the wrong commit or want to revert a reset action.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Restore</h2>
+        <!-- git restore = undo changes to specific files without affecting commits. Safer than reset because it only affects files, not your history -->
+        <dl>
+            <dt><code>git restore filename.html</code></dt>
+            <!-- This erases all your changes to one file and gets the last saved version from GitHub -->
+            <dd>Restores a specific file to its state in the last commit. Useful if you want to discard changes made to a file and revert it back to the version in the last commit.</dd>
+
+            <dt><code>git restore --staged filename.html</code></dt>
+            <!-- Staging area = files you've marked to save. This removes a file from the "to be saved" list without deleting your changes -->
+            <dd>Unstages a file that has been added to the staging area. Useful if you accidentally staged a file and want to remove it from the staging area without discarding the changes.</dd>
+
+            <dt><code>git restore .</code></dt>
+            <!-- The dot (.) means "all files in this folder". This erases all changes to all files in the current directory -->
+            <dd>Restores all files in the current directory to their state in the last commit. Useful if you want to discard changes made to multiple files and revert them back to the version in the last commit.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Status & Inspection</h2>
+        <!-- These commands show you what's happening in your repository -->
+        <dl>
+            <dt><code>git status</code></dt>
+            <!-- Shows which files have changed, which are staged, and which are untracked (new files Git doesn't know about) -->
+            <dd>Displays which files have been modified, staged, or are untracked. Essential for seeing what changed before committing.</dd>
+
+            <dt><code>git diff</code></dt>
+            <!-- Shows the exact differences (line by line) between your current files and the last commit -->
+            <dd>Shows the specific changes you made to files (what was added/removed/modified).</dd>
+
+            <dt><code>git diff --staged</code></dt>
+            <!-- Shows differences between staged files and the last commit. Useful to review what you're about to commit -->
+            <dd>Shows what changes are staged and ready to be committed.</dd>
+
+            <dt><code>git show &lt;commit-hash&gt;</code></dt>
+            <!-- Displays all details about a specific commit: the changes, author, date, and message -->
+            <dd>Shows the complete details of a specific commit including what changed.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Branching</h2>
+        <!-- Branches allow you to work on multiple features at the same time without affecting the main code -->
+        <p>Branches let you create separate versions of your project to work on features without affecting the main code.</p>
+        <dl>
+            <dt><code>git branch</code></dt>
+            <!-- Lists all local branches. The current branch has an asterisk (*) next to it -->
+            <dd>Lists all branches in your local repository. Current branch is marked with *.</dd>
+
+            <dt><code>git branch branch-name</code></dt>
+            <!-- Creates a new branch with the given name, but doesn't switch to it yet -->
+            <dd>Creates a new branch (but doesn't switch to it).</dd>
+
+            <dt><code>git checkout branch-name</code></dt>
+            <!-- Switches to an existing branch. Your files will change to match that branch's version -->
+            <dd>Switches to a different branch. Your working files will update to that branch's state.</dd>
+
+            <dt><code>git switch branch-name</code></dt>
+            <!-- Newer alternative to checkout for switching branches. Does the same thing but is newer syntax -->
+            <dd>Newer alternative to checkout for switching branches (same functionality).</dd>
+
+            <dt><code>git checkout -b new-branch-name</code></dt>
+            <!-- Combines creating and switching: creates a branch AND switches to it in one command -->
+            <dd>Creates a new branch AND switches to it immediately (combines two commands).</dd>
+
+            <dt><code>git switch -c new-branch-name</code></dt>
+            <!-- Newer syntax: same as "git checkout -b" but using the newer switch command -->
+            <dd>Newer way to create and switch to a new branch (alternative to checkout -b).</dd>
+
+            <dt><code>git branch -d branch-name</code></dt>
+            <!-- Deletes a branch. -d = safe delete (won't delete if changes aren't merged). -D = force delete -->
+            <dd>Deletes a branch. Use -D to force delete even if changes aren't merged.</dd>
+
+            <dt><code>git branch -m old-name new-name</code></dt>
+            <!-- Renames a branch. -m = move/rename -->
+            <dd>Renames a branch from old-name to new-name.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Merge & Rebase</h2>
+        <!-- These combine changes from one branch into another -->
+        <dl>
+            <dt><code>git merge branch-name</code></dt>
+            <!-- Takes all changes from another branch and combines them into your current branch. Creates a merge commit if there are no conflicts -->
+            <dd>Merges another branch into your current branch. Creates a merge commit showing the combine.</dd>
+
+            <dt><code>git rebase branch-name</code></dt>
+            <!-- Alternative to merge: replays your commits on top of another branch. Creates a cleaner history but is more complex -->
+            <dd>Alternative to merge - replays your commits on top of another branch. Creates a cleaner history but is riskier.</dd>
+
+            <dt><code>git rebase -i HEAD~n</code></dt>
+            <!-- Interactive rebase: lets you edit, combine, or reorder commits. Useful for cleaning up commit history -->
+            <dd>Interactive rebase - lets you edit, combine, or reorder your last n commits.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Stash</h2>
+        <!-- Stash temporarily saves your changes without committing them. Useful when you need to switch branches but have uncommitted work -->
+        <p>Temporarily save changes without committing, useful when you need to switch branches.</p>
+        <dl>
+            <dt><code>git stash</code></dt>
+            <!-- Saves all your current changes in a temporary storage and reverts files to last commit state -->
+            <dd>Saves your uncommitted changes temporarily so you can work on something else.</dd>
+
+            <dt><code>git stash save "message"</code></dt>
+            <!-- Stash with a descriptive message to remember what was saved -->
+            <dd>Saves changes with a descriptive message so you remember what was stashed.</dd>
+
+            <dt><code>git stash list</code></dt>
+            <!-- Shows all stashed changes with their index numbers (stash@{0}, stash@{1}, etc.) -->
+            <dd>Lists all your stashed changes.</dd>
+
+            <dt><code>git stash pop</code></dt>
+            <!-- Restores the most recent stash AND removes it from the stash list -->
+            <dd>Restores the most recent stash and removes it from the list.</dd>
+
+            <dt><code>git stash apply stash@{n}</code></dt>
+            <!-- Restores a specific stash (by number) but keeps it in the stash list so you can apply it again -->
+            <dd>Restores a specific stash but keeps it saved (doesn't remove it).</dd>
+
+            <dt><code>git stash drop stash@{n}</code></dt>
+            <!-- Deletes a specific stash if you don't need it anymore -->
+            <dd>Deletes a specific stash if you don't need it.</dd>
+
+            <dt><code>git stash clear</code></dt>
+            <!-- Deletes ALL stashes. Be careful - they can't be recovered! -->
+            <dd>Deletes all stashes (careful - this can't be undone!).</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Remote Operations</h2>
+        <!-- These commands manage your connection to GitHub and synchronize code -->
+        <dl>
+            <dt><code>git remote</code></dt>
+            <!-- Lists all remote repositories connected to your project. "origin" is the main one (usually GitHub) -->
+            <dd>Lists all remote repositories (usually "origin" for GitHub).</dd>
+
+            <dt><code>git remote -v</code></dt>
+            <!-- Shows the URLs for each remote - where exactly your code is being pushed/pulled from -->
+            <dd>Shows remote names and their URLs (where they point to).</dd>
+
+            <dt><code>git remote add origin &lt;url&gt;</code></dt>
+            <!-- Connects your local repository to a GitHub repository for the first time -->
+            <dd>Connects your local repository to a GitHub URL.</dd>
+
+            <dt><code>git fetch</code></dt>
+            <!-- Downloads changes from GitHub but doesn't merge them. Safer than pull because you can review first -->
+            <dd>Downloads changes from GitHub without merging them (safer than pull).</dd>
+
+            <dt><code>git fetch origin branch-name</code></dt>
+            <!-- Downloads a specific branch from GitHub -->
+            <dd>Downloads a specific branch from GitHub.</dd>
+
+            <dt><code>git pull origin branch-name</code></dt>
+            <!-- Download and immediately merge changes from a specific branch on GitHub -->
+            <dd>Downloads and merges changes from GitHub in one command.</dd>
+
+            <dt><code>git push origin branch-name</code></dt>
+            <!-- Uploads your branch to GitHub -->
+            <dd>Uploads your branch to GitHub.</dd>
+
+            <dt><code>git push -u origin branch-name</code></dt>
+            <!-- -u sets this branch to track the GitHub version, so future pushes are easier -->
+            <dd>Uploads branch and sets it to track GitHub version (easier future pushes).</dd>
+
+            <dt><code>git push --all</code></dt>
+            <!-- Pushes all branches to GitHub at once -->
+            <dd>Pushes all branches to GitHub.</dd>
+
+            <dt><code>git push --force</code></dt>
+            <!-- Forces GitHub to accept your version even if it conflicts. Dangerous - only use if you know what you're doing! -->
+            <dd>Forces push even if it overwrites remote changes (dangerous - use carefully!).</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Revert & Undo</h2>
+        <!-- Different ways to undo changes -->
+        <dl>
+            <dt><code>git revert &lt;commit-hash&gt;</code></dt>
+            <!-- Creates a NEW commit that undoes the changes of a specific commit. Safe because you keep history -->
+            <dd>Creates a new commit that undoes a previous commit (safe, keeps history visible).</dd>
+
+            <dt><code>git checkout &lt;commit-hash&gt; -- filename</code></dt>
+            <!-- Gets a specific file from an old commit without changing anything else -->
+            <dd>Restores a specific file from a previous commit.</dd>
+
+            <dt><code>git clean -fd</code></dt>
+            <!-- Deletes all untracked files (new files Git doesn't know about). -f = force, -d = directories -->
+            <dd>Deletes all untracked files and folders (files Git doesn't know about).</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Commit Modifications</h2>
+        <!-- Ways to modify commits after creating them -->
+        <dl>
+            <dt><code>git commit --amend</code></dt>
+            <!-- Changes the last commit. Can modify the message or add more files to it -->
+            <dd>Modifies the last commit (change message or add files to it).</dd>
+
+            <dt><code>git commit --amend --no-edit</code></dt>
+            <!-- Adds more files to the last commit without changing the commit message -->
+            <dd>Adds changes to the last commit without changing the message.</dd>
+
+            <dt><code>git cherry-pick &lt;commit-hash&gt;</code></dt>
+            <!-- Takes a specific commit from one branch and applies it to your current branch (without merging entire branches) -->
+            <dd>Applies a specific commit from another branch to your current branch.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Configuration</h2>
+        <!-- Setting up Git with your personal information -->
+        <dl>
+            <dt><code>git config --global user.name "Your Name"</code></dt>
+            <!-- Sets your name so commits show who made them. --global = applies to all projects on your computer -->
+            <dd>Sets your name for all commits (--global applies to all your projects).</dd>
+
+            <dt><code>git config --global user.email "your@email.com"</code></dt>
+            <!-- Sets your email address for commits -->
+            <dd>Sets your email for all commits.</dd>
+
+            <dt><code>git config --list</code></dt>
+            <!-- Shows all your current Git settings -->
+            <dd>Shows all your current Git configuration settings.</dd>
+
+            <dt><code>git init</code></dt>
+            <!-- Initializes a new Git repository in a folder. Creates a .git folder that tracks everything -->
+            <dd>Initializes a new Git repository in the current folder.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Tags & Versions</h2>
+        <!-- Tags mark important points in history like releases -->
+        <dl>
+            <dt><code>git tag</code></dt>
+            <!-- Lists all tags (version markers) in your project -->
+            <dd>Lists all tags (version markers) in your repository.</dd>
+
+            <dt><code>git tag -a v1.0 -m "Version 1.0"</code></dt>
+            <!-- Creates a tag (marker) for a release. -a = annotated (includes message), -m = message -->
+            <dd>Creates a tag (version marker) for an important commit.</dd>
+
+            <dt><code>git push origin v1.0</code></dt>
+            <!-- Uploads a tag to GitHub -->
+            <dd>Uploads a tag to GitHub.</dd>
+
+            <dt><code>git push origin --tags</code></dt>
+            <!-- Uploads all tags to GitHub at once -->
+            <dd>Uploads all tags to GitHub.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Inspection & History</h2>
+        <!-- Commands to understand what happened in your project -->
+        <dl>
+            <dt><code>git blame filename</code></dt>
+            <!-- Shows who changed each line in a file and when. Useful for tracking down when something broke -->
+            <dd>Shows who changed each line in a file and when (great for tracking down bugs).</dd>
+
+            <dt><code>git log --oneline</code></dt>
+            <!-- Shows commit history but in a compact format - one line per commit -->
+            <dd>Shows commit history in a short, readable format (one line per commit).</dd>
+
+            <dt><code>git log --graph --all --decorate</code></dt>
+            <!-- Shows commit history as a visual graph with branches and tags -->
+            <dd>Shows commit history as a visual graph showing all branches.</dd>
+
+            <dt><code>git log -p</code></dt>
+            <!-- Shows full commit history including all the changes in each commit -->
+            <dd>Shows commit history with the actual changes in each commit.</dd>
+
+            <dt><code>git log --author="name"</code></dt>
+            <!-- Shows only commits made by a specific person -->
+            <dd>Shows only commits made by a specific author.</dd>
+
+            <dt><code>git reflog</code></dt>
+            <!-- Shows a log of all reference changes including checkouts, resets, and merges. Useful for recovering lost commits -->
+            <dd>Shows reference logs of all changes (useful for recovering lost commits).</dd>
+
+            <dt><code>git whatchanged</code></dt>
+            <!-- Similar to git log but shows what changed in each commit with file details -->
+            <dd>Shows what files changed in each commit with more detail than git log.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Add & Commit (Advanced)</h2>
+        <!-- More ways to stage and commit files -->
+        <dl>
+            <dt><code>git commit -am "message"</code></dt>
+            <!-- Combines git add for tracked files and git commit in one command. Only works for files Git already knows about, not new files -->
+            <dd>Stages all tracked files AND commits in one command (doesn't add new untracked files).</dd>
+
+            <dt><code>git add -u</code></dt>
+            <!-- Stages only files that have been modified or deleted. Doesn't add new files. -u = update -->
+            <dd>Stages only modified/deleted tracked files (doesn't add new files).</dd>
+
+            <dt><code>git add -A</code></dt>
+            <!-- Stages ALL changes: new files, modified files, AND deleted files. The most comprehensive option -->
+            <dd>Stages all changes including new files, modifications, and deletions.</dd>
+
+            <dt><code>git add .</code></dt>
+            <!-- Stages files in current directory and subdirectories. Doesn't include deletions from outside this folder -->
+            <dd>Stages files in current folder and subdirectories (different from -A for deletions).</dd>
+
+            <dt><code>git commit -m "message" --no-verify</code></dt>
+            <!-- Skips pre-commit hooks/checks if your project has them -->
+            <dd>Commits without running pre-commit hooks or checks.</dd>
+
+            <dt><code>git commit --allow-empty -m "message"</code></dt>
+            <!-- Creates a commit with no file changes. Useful for triggering CI/CD pipelines -->
+            <dd>Creates a commit with no actual changes (useful for triggering builds).</dd>
+
+            <dt><code>git add -p</code></dt>
+            <!-- Interactive staging: lets you choose which parts of files to stage. Useful for breaking changes into smaller commits -->
+            <dd>Interactive staging - choose which changes to stage (part of a file).</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Git Status & Inspection (Advanced)</h2>
+        <!-- More status and inspection commands -->
+        <dl>
+            <dt><code>git status -s</code></dt>
+            <!-- Shows status in short format, easier to read. Shows two letters per file: first for staged, second for unstaged -->
+            <dd>Shows status in compact format (short form).</dd>
+
+            <dt><code>git status --porcelain</code></dt>
+            <!-- Similar to -s but in a format designed for programs/scripts to read -->
+            <dd>Shows status in a format optimized for automation.</dd>
+
+            <dt><code>git diff HEAD</code></dt>
+            <!-- Shows all changes since last commit (both staged and unstaged) -->
+            <dd>Shows all changes (staged and unstaged) since the last commit.</dd>
+
+            <dt><code>git diff --cached</code></dt>
+            <!-- Shows only changes that are staged (same as --staged) -->
+            <dd>Shows only staged changes (alternative to --staged).</dd>
+
+            <dt><code>git diff branch1 branch2</code></dt>
+            <!-- Compares two branches to see what's different -->
+            <dd>Compares differences between two branches.</dd>
+
+            <dt><code>git fsck</code></dt>
+            <!-- Checks the integrity of the repository. Useful if you think something is corrupted -->
+            <dd>Checks if the repository is healthy and intact.</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h2>Important Note</h2>
+        <!-- Local = on your computer, GitHub = online. When you reset, your online copy stays the same. You can always re-download it -->
+        <p><strong>⚠️ Resetting</strong> means changes are removed from your local repository, but they are not gone from GitHub. You can always pull the changes from GitHub to restore the files in your local repository if you have reset them by mistake.</p>
+    </section>
+
+</main>
+
+</body>
+</html>
